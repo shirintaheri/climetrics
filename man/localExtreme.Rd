@@ -44,7 +44,7 @@ filePath <- system.file("external/", package="climertics") # path to the dataset
 pr <- rast(paste0(filePath,'/precip.tif'))
 tmax <- rast(paste0(filePath,'/tmax.tif'))
 
-pr # has 612 layers corresponds to months of the years 1970-2020
+pr # has 360 layers corresponds to months of the years 1991-2020
 
 n <- readRDS(paste0(filePath,'/dates.rds')) # read corresoinding dates
 
@@ -64,7 +64,7 @@ tmax.t <- rts(tmax,n)
 # (i.e., x1 and x2; precipitation and temperature) that specify the percentile of the extreme 
 # condition in climate variable; here, 0.05 is used for precipitation; and 0.95 for temperature
 
-le <- localExtreme(x1=pr.t,x2=tmax.t,t1='1971/1990',t2='2001/2020', extreme = c(0.05, 0.95))
+le <- localExtreme(x1=pr.t,x2=tmax.t,t1='1991/2000',t2='2010/2020', extreme = c(0.05, 0.95))
 
 plot(le, main='Probability of Changes in Local Climate Extreme')
 

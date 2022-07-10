@@ -23,7 +23,6 @@
 The method calculates the trend of a climate variale changes over time. The function use a Raster time series as input and returns a Raster object that represent the trend at the pixel level.
 }
 \examples{
-\dontrun{
 filePath <- system.file("external/", package="climetrics") # path to the dataset folder
 
 # read the climate variables using the terra package (you can use the raster package as well):
@@ -31,12 +30,7 @@ filePath <- system.file("external/", package="climetrics") # path to the dataset
 pr <- rast(paste0(filePath,'/precip.tif'))
 
 tr <- temporalTrend(pr)
-plot(tr, main='Trend (slope) of Precipitation time series')
 
-
-
-}
-
-
+# plot(tr, main='Trend (slope) of Precipitation time series')
 
 }

@@ -23,17 +23,13 @@ the output contains 12 raster layers corresponding to the 12 months (Jan-Dec.). 
 
 }
 \examples{
-\dontrun{
 
-path <- system.file("external/", package="climetrics") # path to the dataset folder
+filePath <- system.file("external/", package="climetrics") # path to the dataset folder
 
 
 pr <- rast(paste0(filePath,'/precip.tif'))
 
 n <- readRDS(paste0(filePath,'/dates.rds')) # read corresoinding dates
-
-class(n)
-length(n)
 
 head(n) # Dates corresponds to the layers in climate variables (pr, tmin, tmax, tmean)
 
@@ -51,11 +47,7 @@ p12 <- apply.months(pr.t,'mean')
 
 p12
 
-plot(p12)
-
-}
-
-
+# plot(p12)
 
 
 }

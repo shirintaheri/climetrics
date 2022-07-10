@@ -46,7 +46,7 @@ tmin <- rast(paste0(filePath,'/tmin.tif'))
 tmax <- rast(paste0(filePath,'/tmax.tif'))
 tmean <- rast(paste0(filePath,'/tmean.tif'))
 
-pr # has 612 layers corresponds to months of the years 1970-2020
+pr # has 360 layers corresponds to months of the years 1991-2020
 
 n <- readRDS(paste0(filePath,'/dates.rds')) # read corresoinding dates
 
@@ -72,10 +72,10 @@ pr.t # see the summary report of the raster time series object
 # test of the metric:
 #---------
 #---------
-# t1 (time1) = '1971/1990' takes all layers corrspond to years between 1971-01-01 to 1990-12-31
-# t2 (time2) = '2001/2020' takes all layers corrspond to years between 2001-01-01 to 2020-12-31
+# t1 (time1) = '1991/1990' takes all layers corrspond to years between 1991-01-01 to 2000-12-31
+# t2 (time2) = '2010/2020' takes all layers corrspond to years between 2010-01-01 to 2020-12-31
 
-aa <- aaClimate(precip=pr.t,tmin=tmin.t,tmax=tmax.t,tmean=tmean.t,t1='1971/1990',t2='2001/2020')
+aa <- aaClimate(precip=pr.t,tmin=tmin.t,tmax=tmax.t,tmean=tmean.t,t1='1991/2000',t2='2010/2020')
 
 plot(aa,main="Changes in the area of Analogous Climates")
 
@@ -90,21 +90,21 @@ plot(aa,main="Changes in the area of Analogous Climates")
 
 # take average of climate variables over each of 12 months:
 
-p12.1 <- apply.months(pr.t[['1971/1990']],'mean')
-p12.2 <- apply.months(pr.t[['2001/2020']],'mean')
+p12.1 <- apply.months(pr.t[['1991/2000']],'mean')
+p12.2 <- apply.months(pr.t[['2010/2020']],'mean')
 
 p12.1
 
 plot(p12.1)
 #--
-tmin12.1 <- apply.months(tmin.t[['1971/1990']],'mean')
-tmin12.2 <- apply.months(tmin.t[['2001/2020']],'mean')
+tmin12.1 <- apply.months(tmin.t[['1991/2000']],'mean')
+tmin12.2 <- apply.months(tmin.t[['2010/2020']],'mean')
 #--
-tmax12.1 <- apply.months(tmax.t[['1971/1990']],'mean')
-tmax12.2 <- apply.months(tmax.t[['2001/2020']],'mean')
+tmax12.1 <- apply.months(tmax.t[['1991/2000']],'mean')
+tmax12.2 <- apply.months(tmax.t[['2010/2020']],'mean')
 #--
-tmean12.1 <- apply.months(tmean.t[['1971/1990']],'mean')
-tmean12.2 <- apply.months(tmean.t[['2001/2020']],'mean')
+tmean12.1 <- apply.months(tmean.t[['1991/2000']],'mean')
+tmean12.2 <- apply.months(tmean.t[['2010/2020']],'mean')
 #--
 
 
@@ -112,8 +112,8 @@ tmean12.2 <- apply.months(tmean.t[['2001/2020']],'mean')
 k1 <- kgc(p=p12.1,tmin = tmin12.1,tmax=tmax12.1, tmean = tmean12.1)
 k2 <- kgc(p=p12.2,tmin = tmin12.2,tmax=tmax12.2, tmean = tmean12.2)
 
-plot(k1, main= "Koggen Geiger climate classification - 1915")
-plot(k2, main= "Koggen Geiger climate classification - 2005")
+plot(k1, main= "Koggen Geiger climate classification - 1995")
+plot(k2, main= "Koggen Geiger climate classification - 2015")
 
 aa <- aaClimateC(k1,k2)
 

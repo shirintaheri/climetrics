@@ -39,6 +39,4 @@ plot(gv, main='Gradiant-based Velocity for Precipitation')
 
 }
 
-
-
 }

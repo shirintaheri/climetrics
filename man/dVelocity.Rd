@@ -28,9 +28,28 @@ Gradiant-based velocity is also implemented in the package and is available thro
 Garcia, R.A., Cabeza, M., Rahbek, C. and Araújo, M.B. (2014). Multiple dimensions of climate change and their implications for biodiversity. Science, 344(6183).
 }
 \examples{
-#-------
-#path <- system.file("external/", package="climetrics") # path to the dataset folder
 
+filePath <- system.file("external/", package="climetrics") # path to the dataset folder
+
+pr <- rast(paste0(filePath,'/precip.tif'))
+tmean <- rast(paste0(filePath,'/tmean.tif'))
+
+n <- readRDS(paste0(filePath,'/dates.rds')) # corresoinding dates
+
+head(n) # Dates corresponds to the layers in climate variables
+
+####################
+
+# use rts function in the rts package to make a raster time series:
+
+pr.t <- rts(pr,n) 
+tmean.t <- rts(tmean,n)
+###########################
+
+
+dv <- dVelocity(pr.t,tmean.t,t1='1991/2000',t2='2010/2020')
+
+# plot(dv)
 
 
 }

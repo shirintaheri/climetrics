@@ -1,7 +1,7 @@
 # Authors: Shirin Taheri, taheri.shi@gmail.com; Babak Naimi (naimi.b@gmail.com)
 # Date :  Oct. 2021
 # Last update :  July 2022
-# Version 1.2
+# Version 1.3
 # Licence GPL v3
 #--------
 
@@ -178,7 +178,7 @@ setMethod('dVelocity', signature(x='SpatRasterTS'),
             xx <- list(x,...)
             if (missing(t1) || missing(t2)) stop("t1 and t2 (layers' indicators corresponding to time1 and time2) are not provided!")
             
-            if (missing(ny)) ny <- .getNyears(x[[1]]@time,t1,t2)
+            if (missing(ny)) ny <- .getNyears(xx[[1]]@time,t1,t2)
             
             xt1 <- xt2 <- list()
             
@@ -202,7 +202,7 @@ setMethod('dVelocity', signature(x='RasterStackBrickTS'),
             xx <- list(x,...)
             if (missing(t1) || missing(t2)) stop("t1 and t2 (layers' indicators corresponding to time1 and time2) are not provided!")
             
-            if (missing(ny)) ny <- .getNyears(x[[1]]@time,t1,t2)
+            if (missing(ny)) ny <- .getNyears(xx[[1]]@time,t1,t2)
             
             xt1 <- xt2 <- list()
             

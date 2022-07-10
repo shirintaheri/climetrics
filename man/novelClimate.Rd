@@ -32,7 +32,7 @@ filePath <- system.file("external/", package="climetrics") # path to the dataset
 pr <- rast(paste0(filePath,'/precip.tif'))
 tmean <- rast(paste0(filePath,'/tmean.tif'))
 
-pr # has 612 layers corresponds to months of the years 1970-2020
+pr # has 360 layers corresponds to months of the years 1991-2020
 
 n <- readRDS(paste0(filePath,'/dates.rds')) # read corresoinding dates
 
@@ -48,10 +48,19 @@ tmean.t <- rts(tmean,n)
 ###########################
 # test of the metric:
 
-n1 <- novelClimate(pr.t,tmean.t,t1='1971/1990',t2='2001/2020') 
+n1 <- novelClimate(pr.t,tmean.t,t1='1991/2000',t2='2010/2020') 
+
 plot(n1, main='Novel Climate')
+
+######
+# if the input object is SpatRaster (or RasterStack or RasterBrick) object:
+# t1 and t2 would be the numbers specifying which layers correspond to time1 and time2:
+
+n2 <- novelClimate(pr,tmean,t1=1:120,t2=229:360)  
+
+plot(n2)
+
+
 }
-
-
 
 }

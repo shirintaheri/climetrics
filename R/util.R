@@ -1,7 +1,7 @@
 # Authors: Shirin Taheri, taheri.shi@gmail.com; Babak Naimi (naimi.b@gmail.com)
 # Date :  Nov. 2020
 # Last update :  July 2022
-# Version 1.9
+# Version 2.0
 # Licence GPL v3
 #--------
 
@@ -244,4 +244,9 @@
     .loaded <- eval(parse(text=paste0('require(',x,')')))
     return (.loaded)
   } else FALSE
+}
+#----
+.is_package_installed <- function(n) {
+  names(n) <- n
+  sapply(n, function(x) length(unlist(lapply(.libPaths(), function(lib) find.package(x, lib, quiet=TRUE, verbose=FALSE)))) > 0)
 }

@@ -1,14 +1,23 @@
 Package: climetrics
 Type: Package
 Title: climate change metrics
-Version: 0.1-22
-Author: Shirin Taheri, Babak Naimi
-Maintainer: Shirin Taheri <taheri.shi@gmail.com>
-Depends: methods, sp (>= 1.2-0), R (>= 3.0.0), rts
-Imports: raster, terra, zoo, yaImpute, dplyr, tidyr, xts 
-Suggests: rmarkdown
-Description: spatio-temporal analysis of climate dynamics to explore and measure different dimensions of
-      climate change in space and time.
+Version: 1.0-02
+Date: 2022-07-10
+Depends: methods, sp (>= 1.2-0), R (>= 3.5.0), rts
+Imports: raster, terra, zoo, yaImpute, xts
+Suggests: R.rsp
+VignetteBuilder: R.rsp
+Description: A framework that facilitates spatio-temporal analysis of climate dynamics through exploring and measuring different dimensions of climate change in space and time.
 License: GPL (>= 3)
 Encoding: UTF-8
-LazyData: true
+URL: http://r-gis.net
+BugReports: https://github.com/shirintaheri/climetrics/issues/
+Authors@R: c(
+  person("Shirin", "Taheri", role = c("cre", "aut"),  
+			email = "taheri.shi@gmail.com", 
+			comment = c(ORCID = "0000-0002-0303-3145")),
+	person("Babak", "Naimi", role = c("aut"),  
+			email = "naimi.b@gmail.com", 
+			comment = c(ORCID = "0000-0001-5431-2729")),
+			person("Miguel", "Araujo", role = "aut")
+	)

@@ -48,9 +48,17 @@ tmax.t <- rts(tmax,n)
 ###########################
 # test of the metric:
 
-s <- novelClimate(pr.t,tmin.t,tmax.t,t1='1971/1990',t2='2001/2020') 
+s <- sed(pr.t,tmin.t,tmax.t,t1='1991/2000',t2='2010/2020') 
+
 plot(s, main='Standardized Local Anomalies')
 
+######
+# if the input object is SpatRaster (or RasterStack or RasterBrick) object:
+# t1 and t2 would be the numbers specifying which layers correspond to time1 and time2:
+
+s <- sed(pr,tmin,tmax,t1=1:120,t2=229:360)  
+
+plot(s)
 
 
 }

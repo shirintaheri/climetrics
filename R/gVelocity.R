@@ -1,7 +1,7 @@
 # Authors: Shirin Taheri (taheri.shi@gmail.com); Babak Naimi (naimi.b@gmail.com)
 # Date :  Sep. 2021
-# Last update :  April 2022
-# Version 1.3
+# Last update :  July 2022
+# Version 1.4
 # Licence GPL v3
 #--------
 
@@ -30,6 +30,9 @@
 .spatialgradTerra <- function(rx, y_diff = 1) {
   # based on the function provided in the vocc package (https://github.com/cbrown5/vocc)
   if (.getProj(rx) == 'longlat') y_dist <- res(rx) * c(111.325, 111.325)
+  
+  if (!.is_package_installed("dplyr") || !.is_package_installed('tidyr')) stop('The packages dplyr and tidyr are needed for this metric; Please make sure they are installed!')
+  
   else {
     y_dist <- res(rx) / 1000
     y_diff <- NA
@@ -47,7 +50,7 @@
   y$sx[y$sx < -1] <- 1
   y$code <- paste(y$sx, y$sy)
   
-  y$code1 <- dplyr::recode(y$code,
+  y$code1 <- eval(parse(text='dplyr::recode(y$code,
                            `1 0` = "sstE",
                            `-1 0` = "sstW",
                            `-1 1` = "sstNW",
@@ -55,7 +58,16 @@
                            `1 1` = "sstNE",
                            `1 -1` = "sstSE",
                            `0 1` = "sstN",
-                           `0 -1` = "sstS")
+                           `0 -1` = "sstS")'),envir =environment())
+  # y$code1 <- dplyr::recode(y$code,
+  #                          `1 0` = "sstE",
+  #                          `-1 0` = "sstW",
+  #                          `-1 1` = "sstNW",
+  #                          `-1 -1` = "sstSW",
+  #                          `1 1` = "sstNE",
+  #                          `1 -1` = "sstSE",
+  #                          `0 1` = "sstN",
+  #                          `0 -1` = "sstS")
   
   y3b <- eval(parse(text="dplyr::select(y,from, code1, sst)"),envir =environment())
   y3b <- eval(parse(text="tidyr::spread(y3b,code1, sst)"),envir =environment())
@@ -68,10 +80,11 @@
                          latneg = cos(.rad(LAT - y_diff)),
                          latfocal = cos(.rad(LAT)))"),envir =environment())
   } else {
-    y3b <- dplyr::mutate(y3b,
+    
+    y3b <- eval(parse(text="dplyr::mutate(y3b,
                          latpos = 1,
                          latneg = 1,
-                         latfocal = 1)
+                         latfocal = 1)"),envir =environment())
   }
   
   y3c <- "dplyr::mutate(y3b,
@@ -91,7 +104,7 @@
   
   y3c <- eval(parse(text=y3c),envir=environment())
   
-  y3c <- dplyr::rowwise(y3c)
+  y3c <- eval(parse(text="dplyr::rowwise(y3c)"),envir=environment())
   y3c <- eval(parse(text="dplyr::mutate(y3c,
       WEgrad = .mnwm(gradWE1, gradWE2, gradWE3, gradWE4, gradWE5, gradWE6),
       NSgrad = .mnwm(gradNS1, gradNS2, gradNS3, gradNS4, gradNS5, gradNS6),
@@ -110,6 +123,8 @@
     y_diff <- NA
   }
   
+  if (!.is_package_installed("dplyr") || !.is_package_installed('tidyr')) stop('The packages dplyr and tidyr are needed for this metric; Please make sure they are installed!')
+  
   nlats <- nrow(rx)
   nlons <- ncol(rx)
   y <- data.frame(adjacent(rx, cells=1:ncell(rx), directions=8,pairs=TRUE))
@@ -122,7 +137,8 @@
   y$sx[y$sx < -1] <- 1
   y$code <- paste(y$sx, y$sy)
   
-  y$code1 <- dplyr::recode(y$code,
+  
+  y$code1 <- eval(parse(text='dplyr::recode(y$code,
                            `1 0` = "sstE",
                            `-1 0` = "sstW",
                            `-1 1` = "sstNW",
@@ -130,7 +146,16 @@
                            `1 1` = "sstNE",
                            `1 -1` = "sstSE",
                            `0 1` = "sstN",
-                           `0 -1` = "sstS")
+                           `0 -1` = "sstS")'),envir =environment())
+  # y$code1 <- dplyr::recode(y$code,
+  #                          `1 0` = "sstE",
+  #                          `-1 0` = "sstW",
+  #                          `-1 1` = "sstNW",
+  #                          `-1 -1` = "sstSW",
+  #                          `1 1` = "sstNE",
+  #                          `1 -1` = "sstSE",
+  #                          `0 1` = "sstN",
+  #                          `0 -1` = "sstS")
   
   y3b <- eval(parse(text="dplyr::select(y,from, code1, sst)"),envir =environment())
   y3b <- eval(parse(text="tidyr::spread(y3b,code1, sst)"),envir =environment())
@@ -143,10 +168,11 @@
                          latneg = cos(.rad(LAT - y_diff)),
                          latfocal = cos(.rad(LAT)))"),envir =environment())
   } else {
-    y3b <- dplyr::mutate(y3b,
+    y3b <- eval(parse(text="dplyr::mutate(y3b,
                          latpos = 1,
                          latneg = 1,
-                         latfocal = 1)
+                         latfocal = 1)"),envir =environment())
+    
   }
   
   y3c <- "dplyr::mutate(y3b,
@@ -166,7 +192,8 @@
   
   y3c <- eval(parse(text=y3c),envir=environment())
   
-  y3c <- dplyr::rowwise(y3c)
+  y3c <- eval(parse(text="dplyr::rowwise(y3c)"),envir=environment())
+  
   y3c <- eval(parse(text="dplyr::mutate(y3c,
       WEgrad = .mnwm(gradWE1, gradWE2, gradWE3, gradWE4, gradWE5, gradWE6),
       NSgrad = .mnwm(gradNS1, gradNS2, gradNS3, gradNS4, gradNS5, gradNS6),

@@ -32,7 +32,7 @@ tmin <- rast(paste0(filePath,'/tmin.tif'))
 tmax <- rast(paste0(filePath,'/tmax.tif'))
 tmean <- rast(paste0(filePath,'/tmean.tif'))
 
-pr # has 612 layers corresponds to months for the years 1970-2020
+pr # has 360 layers corresponds to months of the years 1991-2020
 
 n <- readRDS(paste0(filePath,'/dates.rds')) # read corresoinding dates
 
@@ -62,18 +62,18 @@ pr.t # see the summary report of the raster time series object
 # you can use apply.months function to take the average of climate variables over 
 # each month that generates 12 layers corresponds to 12 months:
 
-p12 <- apply.months(pr.t[['1971/1990']],'mean')
+p12 <- apply.months(pr.t[['1991/2000']],'mean')
 
 
 p12
 
 # plot(p12)
 #--
-tmin12 <- apply.months(tmin.t[['1971/1990']],'mean')
+tmin12 <- apply.months(tmin.t[['1991/2000']],'mean')
 
-tmax12 <- apply.months(tmax.t[['1971/1990']],'mean')
+tmax12 <- apply.months(tmax.t[['1991/2000']],'mean')
 
-tmean12 <- apply.months(tmean.t[['1971/1990']],'mean')
+tmean12 <- apply.months(tmean.t[['1991/2000']],'mean')
 
 #--
 

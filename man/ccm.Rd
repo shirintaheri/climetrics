@@ -69,7 +69,8 @@ tmin <- rast(paste0(filePath,'/tmin.tif'))
 tmax <- rast(paste0(filePath,'/tmax.tif'))
 tmean <- rast(paste0(filePath,'/tmean.tif'))
 
-pr # has 612 layers corresponds to months of the years 1970-2020
+pr # has 360 layers corresponds to months of the years 1991-2020
+
 
 # n <- names(pr)
 # n <- substring(n,2,11)
@@ -97,30 +98,30 @@ tmean.t <- rts(tmean,n)
 pr.t # see the summary report of the raster time series object
 
 ###########################
-# test of the metrics:
+# test of the metric:
 #---------
 #---------
+# t1 (time1) = '1991/1990' takes all layers corrspond to years between 1991-01-01 to 2000-12-31
+# t2 (time2) = '2010/2020' takes all layers corrspond to years between 2010-01-01 to 2020-12-31
 
-# t1 (time1) = '1971/1990' takes all layers corrspond to years between 1971-01-01 to 1990-12-31
-# t2 (time2) = '2001/2020' takes all layers corrspond to years between 2001-01-01 to 2020-12-31
 
-sed <- ccm(pr.t,tmin.t,tmean.t,tmax.t,t1='1901/1930',t2='1991/2020',stat='sed')
+sed <- ccm(pr.t,tmin.t,tmean.t,tmax.t,t1='1991/2000',t2='2010/2020',stat='sed')
 
 plot(sed, main='Standardized Local Anomalies')
 
 
-s2 <- ccm(pr.t,tmin.t,tmean.t,tmax.t,t1='1971/1990',t2='2001/2020',stat=c('nc','sed'))
+s2 <- ccm(pr.t,tmin.t,tmean.t,tmax.t,t1='1991/2000',t2='2010/2020',stat=c('nc','sed'))
 
 plot(s2)
 
 
 
-ve <- ccm(pr.t,tmin.t,tmean.t,tmax.t,t1='1971/1990',t2='2001/2020',stat=c('gve','dve'))
+ve <- ccm(pr.t,tmin.t,tmean.t,tmax.t,t1='1991/2000',t2='2010/2020',stat=c('gve','dve'))
 
 plot(ve)
 
 # following, the extreme argument is needed for localExtreme (lce) metric:
-s3 <- ccm(pr.t,tmin.t,t1='1971/1990',t2='2001/2020',stat=c('localExtreme','sed')
+s3 <- ccm(pr.t,tmin.t,t1='1991/2000',t2='2010/2020',stat=c('localExtreme','sed')
           ,extreme = c(0.05,0.95))
 
 plot(s3)

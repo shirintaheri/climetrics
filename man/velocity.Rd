@@ -30,8 +30,36 @@ The method is developed based on the method represented in the paper Hamnan et a
 }
 \examples{
 
-# path <- system.file("external/", package="climetrics") # path to the dataset folder
 
+filePath <- system.file("external/", package="climetrics") # path to the dataset folder
 
+# read the climate variables using the terra package (you can use the raster package as well):
+
+pr <- rast(paste0(filePath,'/precip.tif'))
+tmax <- rast(paste0(filePath,'/tmax.tif'))
+
+pr # has 360 layers corresponds to months of the years 1991-2020
+
+n <- readRDS(paste0(filePath,'/dates.rds')) # read corresoinding dates
+
+head(n) # Dates corresponds to the layers in climate variables (pr, tmin, tmax, tmean)
+
+####################
+
+# use rts function in the rts package to make a raster time series:
+
+pr.t <- rts(pr,n) 
+tmax.t <- rts(tmax,n)
+
+###########################
+# test of the metric:
+
+# The extreme argument corresponds to the first and second climate variables
+# (i.e., x1 and x2; precipitation and temperature) that specify the percentile of the extreme 
+# condition in climate variable; here, 0.05 is used for precipitation; and 0.95 for temperature
+
+ve <- velocity(x1=pr.t,x2=tmax.t,t1='1991/2000',t2='2010/2020')
+
+# plot(ve, main='Velocity of Climate Change')
 
 }
