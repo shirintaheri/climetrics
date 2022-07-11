@@ -1,8 +1,8 @@
 Package: climetrics
 Type: Package
-Title: climate change metrics
-Version: 1.0-02
-Date: 2022-07-10
+Title: Climate Change Metrics
+Version: 1.0-3
+Date: 2022-07-11
 Depends: methods, sp (>= 1.2-0), R (>= 3.5.0), rts
 Imports: raster, terra, zoo, yaImpute, xts
 Suggests: R.rsp
