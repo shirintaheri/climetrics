@@ -23,8 +23,20 @@
 Novel climate is one of the climate change metrics to quantify the dissimilarities between climate parameters between two time periods. This metric uses standard euclidean distance between each cell in Time 2 and all cells in Time 1 and  retains the minimum of those distances. The inter-annual standard deviation for each parameter is used for the standardization. The larger the score, the more dissimilar the climate in Time 2 is in relation to the global pool of potential climatic analogues.
 
 }
+
+\value{
+A single Raster layer (RasterLayer or SpatRaster depending on the input)
+}
+
+
+\author{Shirin Taheri; Babak Naimi
+
+\email{taheri.shi@gmail.com}; \email{naimi.b@gmail.com}
+
+}
+
 \examples{
-\dontrun{
+\donttest{
 filePath <- system.file("external/", package="climetrics") # path to the dataset folder
 
 # read the climate variables using the terra package (you can use the raster package as well):

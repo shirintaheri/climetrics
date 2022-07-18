@@ -27,6 +27,19 @@ Gradiant-based velocity is also implemented in the package and is available thro
 
 Garcia, R.A., Cabeza, M., Rahbek, C. and Araújo, M.B. (2014). Multiple dimensions of climate change and their implications for biodiversity. Science, 344(6183).
 }
+
+\value{
+A single Raster layer (RasterLayer or SpatRaster depending on the input)
+}
+
+
+\author{Shirin Taheri; Babak Naimi
+
+\email{taheri.shi@gmail.com}; \email{naimi.b@gmail.com}
+
+}
+
+
 \examples{
 
 filePath <- system.file("external/", package="climetrics") # path to the dataset folder
@@ -49,7 +62,7 @@ tmean.t <- rts(tmean,n)
 
 dv <- dVelocity(pr.t,tmean.t,t1='1991/2000',t2='2010/2020')
 
-# plot(dv)
+plot(dv)
 
 
 }

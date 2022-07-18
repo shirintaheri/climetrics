@@ -5,6 +5,13 @@
 
 \title{Koggen Geiger climate classification}
 
+
+\description{
+Given the monthly mean (12 months) of Precipitation, minimum, maximum, and mean temperature datasets, this function identify climate zones following Koggen Geiger climate classification rules.
+
+
+}
+
 \usage{
   kgc(p,tmin, tmax, tmean)
 }
@@ -16,13 +23,24 @@
   \item{tmean}{A Raster object contains 12 months mean temperature}
 }
 
-\description{
+\details{
 If the input object is not a 12 month Raster object but a time series, the function first calls the \code{apply.months} to get the 12 month raster object.
 
+}
+
+\value{
+A single Raster layer (RasterLayer or SpatRaster depending on the input)
+}
+
+
+\author{Shirin Taheri; Babak Naimi
+
+\email{taheri.shi@gmail.com}; \email{naimi.b@gmail.com}
 
 }
+
 \examples{
-\dontrun{
+\donttest{
 filePath <- system.file("external/", package="climetrics") # path to the dataset folder
 
 # read the climate variables using the terra package (you can use the raster package as well):

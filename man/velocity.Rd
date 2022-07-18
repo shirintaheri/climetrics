@@ -28,6 +28,19 @@ The method is developed based on the method represented in the paper Hamnan et a
 
 
 }
+
+\value{
+A single Raster layer (RasterLayer or SpatRaster depending on the input)
+}
+
+
+\author{Shirin Taheri; Babak Naimi
+
+\email{taheri.shi@gmail.com}; \email{naimi.b@gmail.com}
+
+}
+
+
 \examples{
 
 

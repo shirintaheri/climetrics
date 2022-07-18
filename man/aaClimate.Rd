@@ -11,10 +11,16 @@
 
 \title{Changes in the Area of Analogous Climate}
 
+\description{
+To quantify the change in area of analogous climates (classes),the change in area occupied by a given class between time 1 (t1) and time 2 (t2) periods is quantified. 
+
+}
+
 \usage{
   aaClimate(precip,tmin, tmax, tmean,t1,t2)
   aaClimateC(c1,c2)
 }
+
 
 \arguments{
   \item{precip}{A time series of precipitation as a Raster or Raster Time Series object}
@@ -28,14 +34,28 @@
   
 }
 
-\description{
-To quantify the change in area of analogous climates (classes),the change in area occupied by a given class between time 1 (t1) and time 2 (t2) periods is quantified. For a given cell with a given climate class, the change in area of analogous climates represented the ratio (in percentage) of the difference between time 2 and time 1 area of that class to the time 1 area of the same class. Positive values indicated gains in area, negative values indicated losses, and null values reflect no change.
+\details{
+For a given cell with a given climate class, the change in area of analogous climates represented the ratio (in percentage) of the difference between time 2 and time 1 area of that class to the time 1 area of the same class. Positive values indicated gains in area, negative values indicated losses, and null values reflect no change.
 
 The aaClimate first uses \code{apply.months} function to generate the monthly mean of climate parameter (results a Raster object with 12 layers correspond to 12 months) over each time period (t1 and t2); then uses the \code{kgc} function to generate the Koggen Geiger climate classification for each time period. Then the changes in the area of each class is calculated between time 1 and time 2. If the climate classification (regions) are available for time 1 and time 2, then the \code{aaClimateC} can be used instead.
 
 }
+
+\value{
+A single Raster layer (RasterLayer or SpatRaster depending on the input)
+}
+
+
+\author{Shirin Taheri; Babak Naimi
+
+\email{taheri.shi@gmail.com}; \email{naimi.b@gmail.com}
+
+}
+
+
+
 \examples{
-\dontrun{
+\donttest{
 #-------
 filePath <- system.file("external/", package="climetrics") # path to the dataset folder
 

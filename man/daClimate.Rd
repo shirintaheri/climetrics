@@ -11,6 +11,12 @@
 
 \title{Changes in distance to Analogous Climates}
 
+
+\description{
+Quantifies the changes in distances to analogous climates between two time periods.
+
+}
+
 \usage{
   daClimate(precip,tmin, tmax, tmean,t1,t2)
   daClimateC(c1,c2)
@@ -28,15 +34,28 @@
   
 }
 
-\description{
+\details{
 For a given cell, the function quantifies the distances to all cells with analogous climates in the time 1 period, i.e., belonging to the same climate class of the given cell. It also quantifies the distances to all cells that experience analogous climates in the time 2. Then, for each cell, it calculates the median of the great-circle distances (in km) below the 10th percentile of the distribution of all values, for both time 1 and time 2 periods, and maps the change over time. Negative values indicated a temporal decrease in distance, whereas positive values indicated an increase.
 
 The daClimate first uses \code{apply.months} function to generate the monthly mean of climate parameter (results a Raster object with 12 layers correspond to 12 months) over each time period (t1 and t2); then uses the \code{kgc} function to generate the Koggen Geiger climate classification for each time period. Then the changes in the area of each class is calculated between time 1 and time 2. If the climate classification (regions) are available for time 1 and time 2, then the \code{daClimateC} can be used instead.
 
 }
+\value{
+A single Raster layer (RasterLayer or SpatRaster depending on the input)
+}
+
+
+\author{Shirin Taheri; Babak Naimi
+
+\email{taheri.shi@gmail.com}; \email{naimi.b@gmail.com}
+
+}
+
+
+
 \examples{
 
-\dontrun{
+\donttest{
 #-------
 filePath <- system.file("external/", package="climetrics") # path to the dataset folder
 

@@ -7,6 +7,10 @@
 
 \title{Climate Change Metrics}
 
+\description{
+A function to quantify a single or multiple climate change metrics between two time periods given the climatic raster time series variables.
+}
+
 \usage{
   ccm(x,...,stat,t1,t2,extreme,longlat,ny,names,verbose=TRUE)
 }
@@ -24,7 +28,7 @@
   \item{verbose}{logical (default=TRUE), specifies whether the function print messages as a text output on the screen}
 }
 
-\description{
+\details{
 multiple climate change metrics are available to quantify multiple dimensions of climate change between two times.
 
 The metrics include:
@@ -57,8 +61,23 @@ References:
 
 
 }
+
+
+\value{
+A Raster object (RasterLayer or RasterStackBrick or SpatRaster depending on the input) with single or multiple layers correspond to the selected metrics (stat)
+}
+
+
+\author{Shirin Taheri; Babak Naimi
+
+\email{taheri.shi@gmail.com}; \email{naimi.b@gmail.com}
+
+\url{http://r-gis.net}
+}
+
+
 \examples{
-\dontrun{
+\donttest{
 #-------
 filePath <- system.file("external/", package="climetrics") # path to the dataset folder
 

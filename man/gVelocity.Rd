@@ -25,8 +25,20 @@ Distance-based velocity is also implemented in the package and is available thro
 
 Burrows MT, Schoeman DS, Buckley LB, Moore P, Poloczanska ES, Brander KM, Brown C, Bruno JF, Duarte CM, Halpern BS, Holding J. The pace of shifting climate in marine and terrestrial ecosystems. Science. 2011 Nov 4;334(6056):652-5..
 }
+
+\value{
+A single Raster layer (RasterLayer or SpatRaster depending on the input)
+}
+
+
+\author{Shirin Taheri; Babak Naimi
+
+\email{taheri.shi@gmail.com}; \email{naimi.b@gmail.com}
+
+}
+
 \examples{
-\dontrun{
+\donttest{
 filePath <- system.file("external/", package="climetrics") # path to the dataset folder
 
 # read the climate variables using the terra package (you can use the raster package as well):

@@ -33,11 +33,23 @@ Probability of changes in local extremes is calculated at each cell based on eit
 If two climate variables are used (e.g., temperature and precipitation), for each cell, the two probabilities are summed from which the product of the two probabilities are subtracted to obtain a measure of the probability of occurrence of either of the two extreme events (to avoid counting probabilities twice). The  probability of time_1 extreme climates in time_2, is then subtracted from the probability of time_1 extreme climates to obtain the changes in the probability of extreme climate variables. Positive values indicated increased probability in time 2, whereas negative values indicated a decrease. 
 
 }
+
+\value{
+A single Raster layer (RasterLayer or SpatRaster depending on the input)
+}
+
+
+\author{Shirin Taheri; Babak Naimi
+
+\email{taheri.shi@gmail.com}; \email{naimi.b@gmail.com}
+
+}
+
 \examples{
 
-\dontrun{
+\donttest{
 
-filePath <- system.file("external/", package="climertics") # path to the dataset folder
+filePath <- system.file("external/", package="climetrics") # path to the dataset folder
 
 # read the climate variables using the terra package (you can use the raster package as well):
 
