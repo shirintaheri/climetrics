@@ -39,7 +39,7 @@ The complete manual will be available on
 climetrics package can be easily installed using the standard
 install.package function as:
 
-install.package (“climetrics”)
+install.packages("climetrics")
 
 or from GitHub:
 
