@@ -18,8 +18,8 @@ Apply a user specified function over raster time series for each month separatel
 
 \arguments{
   \item{x}{A Raster or Raster Time Series object}
-  \item{FUN}{A function to apply on rasters of each month over different years; The defauls if \code{mean}}
-  \item{...}{additional argument: if x is a Raster or SpatRaster object, corresponsing dates should be specified in the \code{dates} argument}
+  \item{FUN}{A function to apply on rasters of each month over different years; The defaults if \code{mean}}
+  \item{...}{additional argument: if x is a Raster or SpatRaster object, corresponding dates should be specified in the \code{dates} argument}
   
 }
 

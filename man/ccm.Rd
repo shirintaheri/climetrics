@@ -72,7 +72,7 @@ A Raster object (RasterLayer or RasterStackBrick or SpatRaster depending on the 
 
 \email{taheri.shi@gmail.com}; \email{naimi.b@gmail.com}
 
-\url{http://r-gis.net}
+\url{https://r-gis.net/}
 }
 
 
@@ -97,7 +97,7 @@ pr # has 360 layers corresponds to months of the years 1991-2020
 # n <- as.Date(n,format = '%Y.%m.%d')
 
 
-n <- readRDS(paste0(filePath,'/dates.rds')) # read corresoinding dates
+n <- readRDS(paste0(filePath,'/dates.rds')) # read corresponding dates
 
 class(n)
 length(n)
@@ -120,8 +120,8 @@ pr.t # see the summary report of the raster time series object
 # test of the metric:
 #---------
 #---------
-# t1 (time1) = '1991/1990' takes all layers corrspond to years between 1991-01-01 to 2000-12-31
-# t2 (time2) = '2010/2020' takes all layers corrspond to years between 2010-01-01 to 2020-12-31
+# t1 (time1) = '1991/1990' takes all layers correspond to years between 1991-01-01 to 2000-12-31
+# t2 (time2) = '2010/2020' takes all layers correspond to years between 2010-01-01 to 2020-12-31
 
 
 sed <- ccm(pr.t,tmin.t,tmean.t,tmax.t,t1='1991/2000',t2='2010/2020',stat='sed')
@@ -135,9 +135,9 @@ plot(s2)
 
 
 
-ve <- ccm(pr.t,tmin.t,tmean.t,tmax.t,t1='1991/2000',t2='2010/2020',stat=c('gve','dve'))
+#ve <- ccm(pr.t,tmin.t,tmean.t,tmax.t,t1='1991/2000',t2='2010/2020',stat=c('gve','dve'))
 
-plot(ve)
+#plot(ve)
 
 # following, the extreme argument is needed for localExtreme (lce) metric:
 s3 <- ccm(pr.t,tmin.t,t1='1991/2000',t2='2010/2020',stat=c('localExtreme','sed')

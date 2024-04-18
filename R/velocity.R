@@ -1,15 +1,15 @@
 # Authors: Shirin Taheri (taheri.shi@gmail.com); Babak Naimi (naimi.b@gmail.com)
 # Date :  Nov. 2020
-# Last update :  April 2022
-# Version 2.2
+# Last update :  April 2024
+# Version 2.3
 # Licence GPL v3
 #--------
 
 
 
 
-.velocM <- function(p1,p2,f1,f2,log=TRUE,...) {
-  # based on the script provided in Hamnan et al. (2015)
+.velocM <- function(p1,p2,f1,f2,log=TRUE) {
+  # based on the script provided in Hamnan et al. (2015) -> Licence: "cc-by-nc"
   w <- which(!is.na(p1[]))
   
   present1 <- p1[w]
@@ -66,8 +66,8 @@
 }
 #--------
 
-.velocMTerra <- function(p1,p2,f1,f2,log=TRUE,...) {
-  # based on the script provided in Hamnan et al. (2015)
+.velocMTerra <- function(p1,p2,f1,f2,log=TRUE) {
+  # based on the script provided in Hamnan et al. (2015) -> Licence: "cc-by-nc"
   w <- which(!is.na(p1[]))
   
   present1 <- p1[w][,1]

@@ -37,7 +37,7 @@ Quantifies the changes in distances to analogous climates between two time perio
 \details{
 For a given cell, the function quantifies the distances to all cells with analogous climates in the time 1 period, i.e., belonging to the same climate class of the given cell. It also quantifies the distances to all cells that experience analogous climates in the time 2. Then, for each cell, it calculates the median of the great-circle distances (in km) below the 10th percentile of the distribution of all values, for both time 1 and time 2 periods, and maps the change over time. Negative values indicated a temporal decrease in distance, whereas positive values indicated an increase.
 
-The daClimate first uses \code{apply.months} function to generate the monthly mean of climate parameter (results a Raster object with 12 layers correspond to 12 months) over each time period (t1 and t2); then uses the \code{kgc} function to generate the Koggen Geiger climate classification for each time period. Then the changes in the area of each class is calculated between time 1 and time 2. If the climate classification (regions) are available for time 1 and time 2, then the \code{daClimateC} can be used instead.
+The daClimate first uses \code{apply.months} function to generate the monthly mean of climate parameter (results a Raster object with 12 layers correspond to 12 months) over each time period (t1 and t2); then uses the \code{kgc} function to generate the Koppen Geiger climate classification for each time period. Then the changes in the area of each class is calculated between time 1 and time 2. If the climate classification (regions) are available for time 1 and time 2, then the \code{daClimateC} can be used instead.
 
 }
 \value{
@@ -68,7 +68,7 @@ tmean <- rast(paste0(filePath,'/tmean.tif'))
 
 pr # has 360 layers corresponds to months of the years 1991-2020
 
-n <- readRDS(paste0(filePath,'/dates.rds')) # read corresoinding dates
+n <- readRDS(paste0(filePath,'/dates.rds')) # read corresponding dates
 
 class(n)
 length(n)
@@ -92,8 +92,8 @@ pr.t # see the summary report of the raster time series object
 # test of the metric:
 #---------
 #---------
-# t1 (time1) = '1991/1990' takes all layers corrspond to years between 1991-01-01 to 2000-12-31
-# t2 (time2) = '2010/2020' takes all layers corrspond to years between 2010-01-01 to 2020-12-31
+# t1 (time1) = '1991/1990' takes all layers correspond to years between 1991-01-01 to 2000-12-31
+# t2 (time2) = '2010/2020' takes all layers correspond to years between 2010-01-01 to 2020-12-31
 
 da <- daClimate(precip=pr.t,tmin=tmin.t,tmax=tmax.t,tmean=tmean.t,t1='1991/2000',t2='2010/2020')
 
@@ -101,19 +101,19 @@ plot(da,main="Changes in distance to Analogous Climates")
 
 
 ########
-# Alternatively, if the climate in two times are presented as climate classes 
-# (e.g., Koggen Geiger climate classification), changes in distance to analogous 
+# Alternatively, if the climate in both times are available as climate classes
+# (e.g., Koppen Geiger climate classification), changes in distance to analogous 
 # climate can be quantified using the daClimateC function:
 
-# Here, we first generate Koggen Geiger climate classification for time 1 and time 2, separately,
-# we need monthly average of climate variables (over 12 months):
+# Here, we first generate Koppen Geiger climate classification for time 1 and time 2, separately,
+# To do so, we need the monthly average of climate variables (over years for each month):
 
-# take average of climate variables over each of 12 months:
+# take the average of climate variables for each month over different years:
 
 p12.1 <- apply.months(pr.t[['1991/2000']],'mean')
 p12.2 <- apply.months(pr.t[['2010/2020']],'mean')
 
-p12.1
+p12.1 # has 12 layers corresponding to 12 months
 
 plot(p12.1)
 #--
@@ -127,12 +127,15 @@ tmean12.1 <- apply.months(tmean.t[['1991/2000']],'mean')
 tmean12.2 <- apply.months(tmean.t[['2010/2020']],'mean')
 #--
 
-##-------- now, the kgc function can be used to generate the climate clasification map:
+##-------- now, the kgc function can be used to generate the climate classification map:
 k1 <- kgc(p=p12.1,tmin = tmin12.1,tmax=tmax12.1, tmean = tmean12.1)
 k2 <- kgc(p=p12.2,tmin = tmin12.2,tmax=tmax12.2, tmean = tmean12.2)
 
-plot(k1, main= "Koggen Geiger climate classification - 1995")
-plot(k2, main= "Koggen Geiger climate classification - 2015")
+plot(k1, main= "Koppen Geiger climate classification - 1995")
+plot(k2, main= "Koppen Geiger climate classification - 2015")
+
+# Now, given the k1 and k2 climate classes, the changes in distance to Analogous climate classes 
+# between two times is calculated using the daClimateC function:
 
 da <- daClimateC(k1,k2)
 

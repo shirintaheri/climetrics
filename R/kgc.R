@@ -1,7 +1,7 @@
 # Authors: Shirin Taheri (taheri.shi@gmail.com); Babak Naimi (Naimi.b@gmail.com)
 # Date :  March 2021
-# Last update :  July 2022
-# Version 1.2
+# Last update :  December 2022
+# Version 1.3
 # Licence GPL v3
 #--------
 
@@ -153,13 +153,13 @@
   } else stop('The input object is not a Raster!')
   
   w <- which(p7[] == 1)
-  if (length(w) > 0) r[w] <- (2*mat[w]) + 28
+  if (length(w) > 0) r[w] <- (2*data.frame(mat[w])[,1]) + 28
   
   w <- which(p7[] == 2)
-  if (length(w) > 0) r[w] <- (2*mat[w])
+  if (length(w) > 0) r[w] <- (2*data.frame(mat[w])[,1])
   
   w <- which(p7[] == 3)
-  if (length(w) > 0) r[w] <- (2*mat[w]) + 14
+  if (length(w) > 0) r[w] <- (2*data.frame(mat[w])[,1]) + 14
   
   r
 }

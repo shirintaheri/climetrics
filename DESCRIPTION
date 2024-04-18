@@ -1,16 +1,16 @@
 Package: climetrics
 Type: Package
 Title: Climate Change Metrics
-Version: 1.0-5
-Date: 2022-07-18
-Depends: methods, sp (>= 1.2-0), R (>= 3.5.0), rts
+Version: 1.0-15
+Date: 2024-04-18
+Depends: methods, R (>= 3.5.0), rts
 Imports: raster, terra, zoo, yaImpute, xts
-Suggests: R.rsp
+Suggests: R.rsp, tinytest
 VignetteBuilder: R.rsp
 Description: A framework that facilitates spatio-temporal analysis of climate dynamics through exploring and measuring different dimensions of climate change in space and time.
 License: GPL (>= 3)
 Encoding: UTF-8
-URL: http://r-gis.net
+URL: https://r-gis.net/
 BugReports: https://github.com/shirintaheri/climetrics/issues/
 Authors@R: c(
   person("Shirin", "Taheri", role = c("cre", "aut"),  

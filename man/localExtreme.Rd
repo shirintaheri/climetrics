@@ -29,7 +29,7 @@
 }
 
 \description{
-Probability of changes in local extremes is calculated at each cell based on either one or two climate variables (e.g., precipitation and temperature). For each climate variable, the extreme value (percentile of the extreme in the variable distribution) should be specified by user in the extreme parameter. For instance, if temperature and precipitation are specified as the first and second inputs (x1 and x2), extreme=c(0.95,0.05) may be used that consideres 95th and 5th percentiles of the distribution of the temperature and precipitation time series, respectively over the first time period, and then it calculates the probability that the time1 percentile will be exceeded in time2. 
+Probability of changes in local extremes is calculated at each cell based on either one or two climate variables (e.g., precipitation and temperature). For each climate variable, the extreme value (percentile of the extreme in the variable distribution) should be specified by user in the extreme parameter. For instance, if temperature and precipitation are specified as the first and second inputs (x1 and x2), extreme=c(0.95,0.05) may be used that considered 95th and 5th percentiles of the distribution of the temperature and precipitation time series, respectively over the first time period, and then it calculates the probability that the time1 percentile will be exceeded in time2. 
 If two climate variables are used (e.g., temperature and precipitation), for each cell, the two probabilities are summed from which the product of the two probabilities are subtracted to obtain a measure of the probability of occurrence of either of the two extreme events (to avoid counting probabilities twice). The  probability of time_1 extreme climates in time_2, is then subtracted from the probability of time_1 extreme climates to obtain the changes in the probability of extreme climate variables. Positive values indicated increased probability in time 2, whereas negative values indicated a decrease. 
 
 }
@@ -58,7 +58,7 @@ tmax <- rast(paste0(filePath,'/tmax.tif'))
 
 pr # has 360 layers corresponds to months of the years 1991-2020
 
-n <- readRDS(paste0(filePath,'/dates.rds')) # read corresoinding dates
+n <- readRDS(paste0(filePath,'/dates.rds')) # read corresponding dates
 
 head(n) # Dates corresponds to the layers in climate variables (pr, tmin, tmax, tmean)
 

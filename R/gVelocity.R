@@ -1,7 +1,7 @@
 # Authors: Shirin Taheri (taheri.shi@gmail.com); Babak Naimi (naimi.b@gmail.com)
 # Date :  Sep. 2021
-# Last update :  July 2022
-# Version 1.4
+# Last update :  December 2022
+# Version 1.5
 # Licence GPL v3
 #--------
 
@@ -215,7 +215,7 @@
   if (.terra) {
     v <- rast(slope)
     
-    v[grad$icell] <- slope[grad$icell] / grad$Grad
+    v[grad$icell] <- slope[grad$icell][,1] / grad$Grad
     
     .o <- as.matrix(global(v,fun=quantile,probs=c(0.05,0.95),na.rm=TRUE))[1,]
     v[v < .o[1]] <- .o[1]

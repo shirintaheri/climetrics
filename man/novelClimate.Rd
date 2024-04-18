@@ -15,8 +15,8 @@
 \arguments{
   \item{x}{a Raster object or a Raster Time Series of a climate variable}
   \item{...}{additional climate variables can be included as a Raster object or a Raster Time Series}
-  \item{t1}{a chanracter or a numeric vector, specifying the index of raster layers for time 1; if \code{x} is missing, \code{t1} and \code{t2} can be list of climate variables in time 1 and time 2, respectively.}
-  \item{t2}{a chanracter or a numeric vector, specifying the index of raster layers for time 2;  if \code{x} is missing, \code{t1} and \code{t2} can be list of climate variables in time 1 and time 2, respectively.}
+  \item{t1}{a character or a numeric vector, specifying the index of raster layers for time 1; if \code{x} is missing, \code{t1} and \code{t2} can be list of climate variables in time 1 and time 2, respectively.}
+  \item{t2}{a character or a numeric vector, specifying the index of raster layers for time 2;  if \code{x} is missing, \code{t1} and \code{t2} can be list of climate variables in time 1 and time 2, respectively.}
 }
 
 \description{
@@ -46,7 +46,7 @@ tmean <- rast(paste0(filePath,'/tmean.tif'))
 
 pr # has 360 layers corresponds to months of the years 1991-2020
 
-n <- readRDS(paste0(filePath,'/dates.rds')) # read corresoinding dates
+n <- readRDS(paste0(filePath,'/dates.rds')) # read corresponding dates
 
 head(n) # Dates corresponds to the layers in climate variables (pr, tmin, tmax, tmean)
 

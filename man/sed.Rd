@@ -45,7 +45,7 @@ pr <- rast(paste0(filePath,'/precip.tif'))
 tmin <- rast(paste0(filePath,'/tmin.tif'))
 tmax <- rast(paste0(filePath,'/tmax.tif'))
 
-n <- readRDS(paste0(filePath,'/dates.rds')) # read corresoinding dates
+n <- readRDS(paste0(filePath,'/dates.rds')) # read corresponding dates
 
 head(n) # Dates corresponds to the layers in climate variables (pr, tmin, tmax, tmean)
 

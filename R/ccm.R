@@ -1,80 +1,10 @@
 # Authors: Shirin Taheri (taheri.shi@gmail.com); Babak Naimi (naimi.b@gmail.com)
 # Date :  Nov. 2020
-# Last update :  July 2022
-# Version 2.5
+# Last update :  April 2024
+# Version 2.7
 # Licence GPL v3
 #--------
 
-
-
-#---------
-# .vel <- function(basr,futr,nyears,longlat=TRUE,...) {
-#   # The function is based on the script that is kindly provided by Raquel Garcia following the paper Garcia et al. (2014)
-#   nc = ncol(basr) 
-#   nr = nrow(basr) 
-#   resolution = xres(basr) 
-#   basm = matrix(getValues(basr), nrow = nr, ncol = nc, byrow = TRUE)  
-#   #-------
-#   lats = yFromRow(basr,1:nrow(basr)) 
-#   longDist = NULL 
-#   for(i in 1:length(lats)) {
-#     longDist[i] = (pointDistance(c(0,lats[i]),c(resolution,lats[i]),longlat=longlat)) / 1000
-#   } 
-#   #----
-#   spatialg = matrix(NA, nrow=nr, ncol=nc) 
-#   if (longlat) {
-#     for(i in 2:(nr-1)) {
-#       for(j in 2:(nc-1)) {
-#         if(!is.na(basm[i,j])) {
-#           xDist = longDist[i]
-#           
-#           NS = (basm[i-1,j] - basm[i+1,j]) / (2*111.3195*resolution)
-#           EW = (basm[i,j-1] - basm[i,j+1]) / (2*xDist)
-#           
-#           spatialg[i,j] = sqrt(NS^2 + EW^2)
-#         }
-#       }
-#     } 
-#   } else {
-#     for(i in 2:(nr-1)) {
-#       for(j in 2:(nc-1)) {
-#         if(!is.na(basm[i,j])) {
-#           xDist = longDist[i]
-#           
-#           NS = (basm[i-1,j] - basm[i+1,j]) / (2*resolution)
-#           EW = (basm[i,j-1] - basm[i,j+1]) / (2*xDist)
-#           spatialg[i,j] = sqrt(NS^2 + EW^2)
-#         }
-#       }
-#     } 
-#   }
-#   #-------
-#   spatialgr <- raster(basr)
-#   temporalgr <- futr - basr #overall temporal gradient between the two time periods
-#   tyear <- temporalgr / nyears #temporal gradient per year; nyears is the number of years between the two time periods
-#   
-#   
-#   spatialgr <- setValues(spatialgr, spatialg)
-#   
-#   
-#   
-#   ### computing climate change velocity
-#   
-#   ccvel <- abs(tyear) / spatialgr
-#   
-#   # for grid cells with spatial gradient of zero the velocity will be Inf; so here I truncate the spatial gradient so as not to have zero values. The point at which to truncate (0.00005 in the example below) will depend on your data as you're trying to get a good balance between not having many Inf but also not changing a lot of values.
-#   
-#   zero <- Which(spatialgr < 0.00005, cells=TRUE)
-#   spatialgr[zero] <- 0.00005
-#   
-#   ccvelt <- abs(tyear) / spatialgr
-#   ccvelt
-# }
-# 
-# 
-
-
-#----------
 if (!isGeneric("ccm")) {
   setGeneric("ccm", function(x,...,stat,t1,t2,extreme,longlat,ny,names,verbose=TRUE)
     standardGeneric("ccm"))
@@ -85,7 +15,7 @@ setMethod('ccm', signature(x='SpatRasterTS'),
           function(x,...,stat,t1,t2,extreme,longlat,ny,names,verbose=TRUE) {
             xx <- list(x=x,...)
             
-            if (missing(t1) || missing(t2)) stop("t1 and t2 (layers' indicators corresponding to time1 and time2) are not provided!")
+            if (missing(t1) || missing(t2)) stop("t1 and t2 (Indicators of layers corresponding to time1 and time2) are not provided!")
             
             if (missing(names)) names <- NULL
             
@@ -130,30 +60,30 @@ setMethod('ccm', signature(x='SpatRasterTS'),
               if (missing(extreme)) stop('"extreme" is needed...!')
               #-
               if (length(xx) > 2) {
-                xx <- xx[1:2]
+                .xx <- xx[1:2]
                 
                 if (verbose) cat('\nlocalExtreme metric can be calculated using either one or two climate variables... only the first two variables are used!')
                 else warning('localExtreme metric can be calculated using either one or two climate variables... only the first two variables are used!')
                 
+              } else .xx <- xx
+              #-
+              if (length(extreme) > length(.xx)) {
+                warning(paste0('number of extreme probabilities (',length(extreme),') should be equal to the number of climate parameters (',length(xx),'); Only the first ',length(.xx),' values from extreme is used!'))
+                extreme <- extreme[1:length(.xx)]
               }
               #-
-              if (length(extreme) > length(xx)) {
-                warning(paste0('number of extreme probabilities (',length(extreme),') should be equal to the number of climate parameters (',length(xx),'); Only the first ',length(xx),' values from extreme is used!'))
-                extreme <- extreme[1:length(xx)]
-              }
-              #-
-              if (length(extreme) < length(xx)) stop('extreme probabilities should be provided for both climate parameters')
+              if (length(extreme) < length(.xx)) stop('extreme probabilities should be provided for both climate parameters')
               #-
               if (any(extreme > 1 | extreme < 0)) stop('extreme is a probability value that should be within the range of 0 and 1')  
               #-------------------------
               x1 <- x2 <- list()
-              for (i in 1:length(xx)) {
-                x1[[i]] <- xx[[i]][[t1]]@raster
-                x2[[i]] <- xx[[i]][[t2]]@raster
+              for (i in 1:length(.xx)) {
+                x1[[i]] <- .xx[[i]][[t1]]@raster
+                x2[[i]] <- .xx[[i]][[t2]]@raster
               }
               
               o[['localExtreme']] <- .eeChange(x1,x2,extreme)
-              
+              rm(.xx);gc()
             }
             #-------
             if ('novelClimate' %in% stat) {
@@ -174,11 +104,6 @@ setMethod('ccm', signature(x='SpatRasterTS'),
                 } else {
                   for (i in 2:length(nn)) {
                     nn[i] <- .argMatch(nn[i],nstat)  
-                    
-                    # if (nn[i] %in% c('precipitation','prec','p','pr','precip')) nn[i] <- 'precip'
-                    # else if (nn[i] %in% c('precipitation','prec','p','pr','precip')) nn[i] <- 'precip'
-                    # else if (nn[i] %in% c('precipitation','prec','p','pr','precip')) nn[i] <- 'precip'
-                    # else if (nn[i] %in% c('precipitation','prec','p','pr','precip')) nn[i] <- 'precip'
                   }
                   if (any(is.na(nn))) stop('The aaClimate metric needs precipitation, minimum and maximum temperature (optional also mean temperature). The input variables are not identified! Specify their names in the names argument!')
                   
@@ -252,7 +177,7 @@ setMethod('ccm', signature(x='SpatRasterTS'),
               p2 <- app(xx[[2]][[t1]]@raster, 'mean',na.rm=TRUE)
               f2 <- app(xx[[2]][[t2]]@raster, 'mean',na.rm=TRUE)
               
-              o[['velocity']] <-  .velocMTerra(p1,p2,f1,f2,...)
+              o[['velocity']] <-  .velocMTerra(p1,p2,f1,f2)
               
             } 
             

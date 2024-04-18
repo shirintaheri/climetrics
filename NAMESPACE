@@ -1,18 +1,11 @@
-import(sp)
 import("methods")
 importFrom("graphics", "abline", "axis", "box", "grid", "lines", "title")
 importFrom("stats", "na.omit","quantile","var","median","lm","pnorm","sd")
-#importFrom("base", "order","paste")
-importFrom("sp", "is.projected")
 importFrom("rts", rts)
-#importFrom("dplyr", mutate,select,rowwise,recode)
-#importFrom("tidyr", spread)
 importFrom("xts", nyears)
 importFrom("yaImpute", ann)
-#importFrom("magrittr", `%>%`)
 importFrom("zoo", index)
-importFrom("raster",calc,raster,nlayers,addLayer,pointDistance,xyFromCell,projection,extent,stack,yFromRow,crs,res,ncell,
-           as.data.frame,nrow,ncol,adjacent,getValues,rowFromCell,colFromCell,xres,setValues,Which,cellFromXY,yFromCell,values,mean,unique,
-           cellStats)
-importFrom("terra",app,rast,nlyr,global,minmax,geom,project,vect,quantile,mean,unique,distance,ext,ifel)
+importFrom("raster",adjacent,addLayer,as.data.frame,calc,cellStats,cellFromXY,colFromCell,crs,extent,getValues,mean,ncell,nlayers,nrow,ncol,
+           pointDistance,projection,raster,stack,res,rowFromCell,xres,setValues,Which,xyFromCell,yFromRow,yFromCell,values,unique)
+importFrom("terra",app,distance,ext,geom,global,ifel,minmax,mean,nlyr,project,quantile,rast,unique,vect)
 exportPattern("^[[:alpha:]]+")

@@ -45,9 +45,9 @@ filePath <- system.file("external/", package="climetrics") # path to the dataset
 
 pr <- rast(paste0(filePath,'/precip.tif'))
 
-gv <- gVelocity(pr)
+#gv <- gVelocity(pr)
 
-plot(gv, main='Gradiant-based Velocity for Precipitation')
+#plot(gv, main='Gradiant-based Velocity for Precipitation')
 
 }
 
